@@ -9,3 +9,8 @@ Examples:
 <code>please play rbr computer networks</code><br>
 <code>please play despacito youtune</code><br>
 <code>please search how merge sort works</code><br>
+
+can make multipple queries at once
+
+e.g.
+<code>please play song on youtube and open projects </code>
