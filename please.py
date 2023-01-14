@@ -1,6 +1,7 @@
 import os
 import random
 import sys
+import sqlite3
 
 def listToString(s, sep=' '):
     str1 = ""
@@ -8,6 +9,42 @@ def listToString(s, sep=' '):
         str1 += ele
         str1 += sep
     return str1
+
+DB_PATH = "D://Desktop/Projects/How Can I Help You/todo.db"
+
+def create_table():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('CREATE TABLE IF NOT EXISTS todo (id INTEGER primary key, task text)')
+    conn.commit()
+    conn.close()
+
+def add_todo(q):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO todo (task) VALUES ("'+q+'")')
+    conn.commit()
+    conn.close()
+
+
+def del_todo(q):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('delete from todo where id = ('+q+')')
+    conn.commit()
+    conn.close()
+
+def show_todo():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    data=cursor.execute("select * from todo")
+    print("\n************ Todo ************\n")
+    for row in data:
+        print(str(row[0]) + "\t" + row[1])
+    print("\n")
+    conn.commit()
+    conn.close()
+    return data
 
 my_songs_yt = [
     "erWlHBJLA20",
@@ -54,6 +91,7 @@ open_map = {
     "youtube" : "start chrome https://www.youtube.com/",
     "linkedin" : "start chrome https://www.linkedin.com/feed/",
     "github" : "start chrome https://github.com/rohitkrtiwari/",
+    "classroom" : "start chrome https://classroom.google.com/u/1/",
 }
 
 def main():
@@ -72,6 +110,22 @@ def main():
         pickOne = os.listdir(path)[random.randrange(0, len(os.listdir(path)), 1)]
         os.startfile("C://Users//rohit//Music//"+pickOne)
         
+    if("todo" in q):
+
+        if(cmd[cmd.index("todo")-1] == "create"):
+            create_table()
+
+        elif(cmd[cmd.index("todo")-1] == "show"):
+            show_todo()
+
+        elif(cmd[cmd.index("todo")-1] == "add"):
+            task = listToString(cmd[cmd.index("todo")+1:])
+            add_todo(task)
+
+        elif(cmd[cmd.index("todo")-1] == "delete"):
+            id = cmd[cmd.index("todo")+1]
+            del_todo(id)
+
     if (cmd[0] == "search"):
         query = listToString(cmd[1:], sep="%20")
         os.system("start chrome https://www.google.com/search?q="+query)
