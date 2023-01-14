@@ -1,5 +1,5 @@
 # How-Can-I-Help-You
-Just add the path in your environment varriables then see the magic
+Just add the path of *please.py* in your environment vaiables then try typing following commands in your cmd 
 
 Examples:
 
