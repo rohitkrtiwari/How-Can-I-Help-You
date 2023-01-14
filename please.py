@@ -100,12 +100,12 @@ def main():
     if ("open" in q):
         os.system(open_map[cmd[cmd.index("open")+1]])
 
-    if("play song on youtube" in q):
+    if("play song" in q):
         pickOne = my_songs_yt[random.randrange(0, len(my_songs_yt), 1)]
         link = "https://www.youtube.com/watch?v="+pickOne
         os.system("start chrome "+link)
 
-    if("play local song" in q):
+    if("play local" in q):
         path = "C://Users//rohit//Music//"
         pickOne = os.listdir(path)[random.randrange(0, len(os.listdir(path)), 1)]
         os.startfile("C://Users//rohit//Music//"+pickOne)

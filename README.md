@@ -13,8 +13,8 @@ Examples:
 we can also make multiple queries at once
 
 e.g. <br>
-* <code>please play song on youtube and open projects </code>
-* <code>please play local song and open projects </code>
+* <code>please play song  and open projects </code>
+* <code>please play local and open projects </code>
 
 ### *Todo Working*
 *  <code>please show todo</code><br>
