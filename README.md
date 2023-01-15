@@ -20,3 +20,15 @@ e.g. <br>
 *  <code>Daisy show todo</code><br>
 *  <code>Daisy add todo compiler assignment 2 by 15 Jan</code><br>
 *  <code>Daisy delete todo _id </code><br>
+
+### *Create Project*
+<code>Daisy create project _projectName_</code><br>
+
+* Navigate to project folder
+* Create folder with projectName
+* navigate into Folder
+* git repo initialization
+* Creating new repository on Github
+* copy the remote and add it to new folder
+* create a readme file
+* git commit
