@@ -2,6 +2,9 @@ import os
 import random
 import sys
 import sqlite3
+import requests
+from pprint import pprint
+import time
 
 def listToString(s, sep=' '):
     str1 = ""
@@ -46,6 +49,34 @@ def show_todo():
     conn.close()
     return data
 
+def create_gitRepo(repo_name):
+    GITHUB_TOKEN = open("D:\\Desktop\\projects\\How Can I Help You\\token.gt", "r").read()
+    API_URL = 'https://api.github.com'
+    payload = '{"name": "'+repo_name+'"}'
+    headers = {
+        "Authorization" : "token " + GITHUB_TOKEN,
+        "Accept": "application/vnd.github.v3+json"
+    }
+    r = requests.post(API_URL+"/user/repos",data=payload,headers=headers)
+    pprint(r.json)
+    repo_name = repo_name.replace(" ", "-")
+    remote_repo = "https://github.com/rohitkrtiwari/"+repo_name+".git"
+    return remote_repo
+
+def create_project(project_name):
+    os.chdir("D:\\Desktop\\projects")
+    os.mkdir(project_name)
+    os.chdir("D:\\Desktop\\projects\\"+project_name)
+    os.system("git init")
+    remote_repo = "https://github.com/rohitkrtiwari/Demo_Project-.git"
+    # remote_repo = create_gitRepo(project_name)
+    os.system("git remote add origin "+remote_repo)
+    with open('readme.md', 'w') as fp:
+        fp.write("# "+project_name)
+    print(os.getcwd())
+    os.system("git add .")
+    os.system('git commit -m "Initial Commit"')
+    
 my_songs_yt = [
     "erWlHBJLA20",
     "9emx__jxcTE",
@@ -111,11 +142,7 @@ def main():
         os.startfile("C://Users//rohit//Music//"+pickOne)
         
     if("todo" in q):
-
-        if(cmd[cmd.index("todo")-1] == "create"):
-            create_table()
-
-        elif(cmd[cmd.index("todo")-1] == "show"):
+        if(cmd[cmd.index("todo")-1] == "show"):
             show_todo()
 
         elif(cmd[cmd.index("todo")-1] == "add"):
@@ -125,6 +152,10 @@ def main():
         elif(cmd[cmd.index("todo")-1] == "delete"):
             id = cmd[cmd.index("todo")+1]
             del_todo(id)
+
+    if("create project" in q):
+        project_name = listToString(cmd[cmd.index("project")+1:])
+        create_project(project_name)
 
     if (cmd[0] == "search"):
         query = listToString(cmd[1:], sep="%20")
