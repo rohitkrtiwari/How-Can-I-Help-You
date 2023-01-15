@@ -69,13 +69,14 @@ def create_project(project_name):
     os.chdir("D:\\Desktop\\projects\\"+project_name)
     os.system("git init")
     remote_repo = "https://github.com/rohitkrtiwari/Demo_Project-.git"
-    # remote_repo = create_gitRepo(project_name)
+    remote_repo = create_gitRepo(project_name)
     os.system("git remote add origin "+remote_repo)
     with open('readme.md', 'w') as fp:
         fp.write("# "+project_name)
     print(os.getcwd())
     os.system("git add .")
     os.system('git commit -m "Initial Commit"')
+    os.system('code ."')
     
 my_songs_yt = [
     "erWlHBJLA20",
