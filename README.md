@@ -32,3 +32,4 @@ e.g. <br>
 * copy the remote and add it to new folder
 * create a readme file
 * git commit
+* open project in vs code
